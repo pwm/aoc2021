@@ -1,4 +1,5 @@
 .ghc.environment*
+.envrc.private
 .hie
 cabal.project.local
 dist-newstyle
