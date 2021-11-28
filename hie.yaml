@@ -1,0 +1,13 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:aoc2021"
+
+    - path: "bin/Fetch.hs"
+      component: "aoc2021:exe:fetch"
+
+    - path: "bin/Solve.hs"
+      component: "aoc2021:exe:solve"
+
+    - path: "test"
+      component: "aoc2021:test:spec"
