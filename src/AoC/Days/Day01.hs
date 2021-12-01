@@ -10,14 +10,14 @@ solveA :: [Int] -> Int
 solveA = dists
 
 solveB :: [Int] -> Int
-solveB = dists . fmap sum . triplets
+solveB = dists . fmap sum . window 3
 
 dists :: [Int] -> Int
 dists = fst . foldl (\(acc, prev) cur -> (acc + (if prev < cur then 1 else 0), cur)) (0, maxBound)
 
-triplets :: [Int] -> [[Int]]
-triplets = reverse . go []
+window :: Int -> [Int] -> [[Int]]
+window n0 = reverse . go n0 []
   where
-    go c l
-      | length l < 3 = c
-      | otherwise = go (take 3 l : c) (drop 1 l)
+    go n c l
+      | length l < n = c
+      | otherwise = go n (take n l : c) (drop 1 l)
