@@ -10,14 +10,10 @@ solveA :: [Int] -> Int
 solveA = dists
 
 solveB :: [Int] -> Int
-solveB = dists . fmap sum . window 3
+solveB = dists . window3
 
 dists :: [Int] -> Int
-dists = fst . foldl (\(acc, prev) cur -> (acc + (if prev < cur then 1 else 0), cur)) (0, maxBound)
+dists l = length $ filter (== True) $ zipWith (<) (maxBound : l) l
 
-window :: Int -> [Int] -> [[Int]]
-window n0 = reverse . go n0 []
-  where
-    go n c l
-      | length l < n = c
-      | otherwise = go n (take n l : c) (drop 1 l)
+window3 :: [Int] -> [Int]
+window3 l = zipWith3 (\a b c -> a + b + c) l (drop 1 l) (drop 2 l)

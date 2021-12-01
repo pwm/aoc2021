@@ -22,6 +22,7 @@ library
       AoC.Days.Day01
       AoC.Lib.Display
       AoC.Lib.Grid
+      AoC.Lib.Load
       AoC.Lib.Memo
       AoC.Lib.Parser
       AoC.Lib.SimpleParser

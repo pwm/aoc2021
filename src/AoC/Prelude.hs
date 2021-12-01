@@ -26,6 +26,8 @@ module AoC.Prelude
     substring,
     tupleMin,
     tupleMax,
+    tupleSum,
+    tupleProduct,
     binToDec,
     sqrtInt,
     choose,
@@ -144,6 +146,10 @@ substring start end text = take (end - start) (drop start text)
 tupleMin, tupleMax :: (Ord a, Each s s a a) => s -> a
 tupleMin = minimum . toListOf each
 tupleMax = maximum . toListOf each
+
+tupleSum, tupleProduct :: (Num a, Each s s a a) => s -> a
+tupleSum = sum . toListOf each
+tupleProduct = product . toListOf each
 
 binToDec :: [Bool] -> Integer
 binToDec = foldl' (\acc x -> 2 * acc + toInteger (fromEnum x)) 0
