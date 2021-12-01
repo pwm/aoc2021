@@ -1,7 +1,6 @@
 module AoC.Lib.SimpleParser where
 
 import AoC.Prelude
-import Data.List.Split (splitOn)
 
 -- "123456" -> Just 123456
 stringToInt :: String -> Maybe Int

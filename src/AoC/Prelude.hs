@@ -41,6 +41,7 @@ import Data.Foldable as X (Foldable (..), asum, foldl')
 import Data.Functor.Identity as X (Identity (..))
 import Data.Generics.Labels as X ()
 import Data.List as X (sortOn, uncons, unfoldr)
+import Data.List.Split as X
 import Data.Map.Strict as X (Map, (!?))
 import Data.Map.Strict qualified as Map
 import Data.Maybe as X hiding (fromJust)

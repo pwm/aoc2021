@@ -19,6 +19,7 @@ library
       AoC.Core.File
       AoC.Core.Solver
       AoC.Days.Day00
+      AoC.Days.Day01
       AoC.Lib.Display
       AoC.Lib.Grid
       AoC.Lib.Memo
@@ -52,6 +53,7 @@ library
       MultiParamTypeClasses
       MultiWayIf
       NamedFieldPuns
+      NoImplicitPrelude
       NumericUnderscores
       LambdaCase
       OverloadedLabels
@@ -113,6 +115,7 @@ executable fetch
       MultiParamTypeClasses
       MultiWayIf
       NamedFieldPuns
+      NoImplicitPrelude
       NumericUnderscores
       LambdaCase
       OverloadedLabels
@@ -175,6 +178,7 @@ executable solve
       MultiParamTypeClasses
       MultiWayIf
       NamedFieldPuns
+      NoImplicitPrelude
       NumericUnderscores
       LambdaCase
       OverloadedLabels
@@ -215,6 +219,7 @@ test-suite spec
   main-is: Spec.hs
   other-modules:
       AoC.Days.Day00Spec
+      AoC.Days.Day01Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
@@ -242,6 +247,7 @@ test-suite spec
       MultiParamTypeClasses
       MultiWayIf
       NamedFieldPuns
+      NoImplicitPrelude
       NumericUnderscores
       LambdaCase
       OverloadedLabels
