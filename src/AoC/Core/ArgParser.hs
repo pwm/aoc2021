@@ -1,6 +1,7 @@
 module AoC.Core.ArgParser where
 
 import AoC.Core.Day
+import AoC.Prelude
 import Options.Applicative
 
 execArgParser :: ParserInfo a -> IO a

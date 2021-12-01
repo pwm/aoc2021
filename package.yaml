@@ -87,6 +87,7 @@ default-extensions:
   - MultiParamTypeClasses
   - MultiWayIf
   - NamedFieldPuns
+  - NoImplicitPrelude
   - NumericUnderscores
   - LambdaCase
   - OverloadedLabels

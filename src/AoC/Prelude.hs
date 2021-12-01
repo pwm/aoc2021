@@ -26,6 +26,8 @@ module AoC.Prelude
     substring,
     tupleMin,
     tupleMax,
+    tupleSum,
+    tupleProduct,
     binToDec,
     sqrtInt,
     choose,
@@ -41,6 +43,7 @@ import Data.Foldable as X (Foldable (..), asum, foldl')
 import Data.Functor.Identity as X (Identity (..))
 import Data.Generics.Labels as X ()
 import Data.List as X (sortOn, uncons, unfoldr)
+import Data.List.Split as X
 import Data.Map.Strict as X (Map, (!?))
 import Data.Map.Strict qualified as Map
 import Data.Maybe as X hiding (fromJust)
@@ -143,6 +146,10 @@ substring start end text = take (end - start) (drop start text)
 tupleMin, tupleMax :: (Ord a, Each s s a a) => s -> a
 tupleMin = minimum . toListOf each
 tupleMax = maximum . toListOf each
+
+tupleSum, tupleProduct :: (Num a, Each s s a a) => s -> a
+tupleSum = sum . toListOf each
+tupleProduct = product . toListOf each
 
 binToDec :: [Bool] -> Integer
 binToDec = foldl' (\acc x -> 2 * acc + toInteger (fromEnum x)) 0
