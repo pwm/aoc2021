@@ -35,7 +35,7 @@ module AoC.Prelude
 where
 
 import Control.Applicative as X (Alternative (..))
-import Control.Lens as X (Each (..), toListOf)
+import Control.Lens as X (Each (..), toListOf, (^.), _1, _2)
 import Control.Monad as X (when, (<=<), (>=>))
 import Data.Bifunctor as X (first)
 import Data.Either as X
