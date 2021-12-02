@@ -1,5 +1,6 @@
 module AoC.Days.Day00 where
 
+import AoC.Lib.Load ()
 import AoC.Prelude
 
 parse :: String -> Maybe ()

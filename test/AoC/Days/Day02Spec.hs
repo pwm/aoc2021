@@ -1,17 +1,17 @@
-module AoC.Days.Day01Spec
+module AoC.Days.Day02Spec
   ( spec,
   )
 where
 
 import AoC.Core.Day
 import AoC.DayTester
-import AoC.Days.Day01
+import AoC.Days.Day02
 import Test.Hspec
 
 spec :: Spec
 spec =
   dayTester
-    (mkDay 01)
+    (mkDay 02)
     parse
-    (solveA, 1722)
-    (solveB, 1748)
+    (solveA, 1660158)
+    (solveB, 1604592846)
