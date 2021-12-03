@@ -1,7 +1,7 @@
 module AoC.Days.Day02 where
 
 import AoC.Lib.Parser
-import AoC.Prelude hiding (Down, oneOf)
+import AoC.Prelude hiding (Down)
 
 parse :: String -> Maybe [Move]
 parse = parseFileWith moveP
@@ -41,8 +41,10 @@ moveP :: Parser Move
 moveP = do
   dir <- choice $ lexeme . string <$> ["down", "up", "forward"]
   x <- intP
-  pure $
-    if
-        | dir == "down" -> Down x
-        | dir == "up" -> Up x
-        | otherwise -> Forward x
+  let parseDir :: String -> Maybe Move
+      parseDir = \case
+        "down" -> Just (Down x)
+        "up" -> Just (Up x)
+        "forward" -> Just (Forward x)
+        _ -> Nothing
+  maybeToP parseDir dir

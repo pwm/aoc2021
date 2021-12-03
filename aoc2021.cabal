@@ -21,6 +21,7 @@ library
       AoC.Days.Day00
       AoC.Days.Day01
       AoC.Days.Day02
+      AoC.Days.Day03
       AoC.Lib.Display
       AoC.Lib.Grid
       AoC.Lib.Load
@@ -223,6 +224,7 @@ test-suite spec
       AoC.Days.Day00Spec
       AoC.Days.Day01Spec
       AoC.Days.Day02Spec
+      AoC.Days.Day03Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
