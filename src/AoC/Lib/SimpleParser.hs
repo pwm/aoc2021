@@ -21,7 +21,7 @@ stringToIntsSepBy sep = traverse stringToInt . splitOn sep
 stringToDigits :: String -> Maybe [Int]
 stringToDigits s = if length xs == length s then Just xs else Nothing
   where
-    xs = concatMap @[] (fmap fst . (\c -> reads @Int [c])) s
+    xs = concatMap (fmap fst . (\c -> reads @Int [c])) s
 
 -- (-123456) -> [1, 2, 3, 4, 5, 6]
 -- 0 -> [0]
