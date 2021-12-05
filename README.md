@@ -1,22 +1,34 @@
 ## (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ *Advent of Code 2021* (◕‿◕✿)
 
+## Use
+
 Build env:
 
-    $ direnv allow .
-
-Build app:
-
-    $ hpack && cabal build
+    direnv allow .
 
 Set session cookie for the fetcher:
 
-    $ echo 'export AOC_SESSION=<my-aoc-2020-session-cookie>' > .envrc.private
+    echo 'export AOC_SESSION=<my-aoc-session-cookie>' > .envrc.private
 
-Create day:
+Build app:
 
-    $ scripts/mkday.sh
+    scripts/comp.sh
 
-Solve day:
+Solve specific day:
 
-    $ cabal run solve -- --day <day>
+    scripts/solve.sh <day>
+
+Run tests:
+
+    scripts/test.sh
+
+## Dev
+
+Create current day:
+
+    scripts/mkday.sh
+
+Create specific day:
+
+    scripts/mkday.sh <day>
 

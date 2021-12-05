@@ -11,6 +11,7 @@ dependencies:
   - filepath
   - generic-lens
   - http-client
+  - http-types
   - lens
   - megaparsec
   - mtl

@@ -6,7 +6,7 @@ cabal-version: 1.12
 
 name:           aoc2021
 version:        0.1.0.0
-license:        MIT
+license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
 
@@ -23,6 +23,7 @@ library
       AoC.Days.Day02
       AoC.Days.Day03
       AoC.Days.Day04
+      AoC.Days.Day05
       AoC.Lib.Display
       AoC.Lib.Grid
       AoC.Lib.Load
@@ -77,6 +78,7 @@ library
     , filepath
     , generic-lens
     , http-client
+    , http-types
     , lens
     , megaparsec
     , mtl
@@ -140,6 +142,7 @@ executable fetch
     , filepath
     , generic-lens
     , http-client
+    , http-types
     , lens
     , megaparsec
     , mtl
@@ -203,6 +206,7 @@ executable solve
     , filepath
     , generic-lens
     , http-client
+    , http-types
     , lens
     , megaparsec
     , mtl
@@ -227,6 +231,7 @@ test-suite spec
       AoC.Days.Day02Spec
       AoC.Days.Day03Spec
       AoC.Days.Day04Spec
+      AoC.Days.Day05Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
@@ -276,6 +281,7 @@ test-suite spec
     , generic-lens
     , hspec
     , http-client
+    , http-types
     , lens
     , megaparsec
     , mtl

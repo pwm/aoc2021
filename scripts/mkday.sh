@@ -5,16 +5,23 @@ cd "$(dirname "${BASH_SOURCE[0]}")/../" || exit
 month=$(date +%m)
 day=$(date +%d)
 
-if [[ $month != 12 ]]; then
-  echo "Not december yet!"
-  exit 1
+if [[ $# == 1 ]]; then
+  month=12
+  # todo: must add trailing 0
+  day=$1
+else
+  if [[ $month != 12 ]]; then
+    echo "Not december yet!"
+    exit 1
+  fi
+  if [[ $day -gt 25 ]]; then
+    echo "AoC is over!"
+    exit 1
+  fi
 fi
 
-if [[ $day -gt 25 ]]; then
-  echo "AoC is over!"
-  exit 1
-fi
-
+# This will fail of input file is already present
+# and thus will not execute the destructive command below
 cabal run fetch -- --day "$day"
 
 cp -n src/AoC/Days/Day00.hs src/AoC/Days/Day"$day".hs
