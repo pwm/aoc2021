@@ -7,8 +7,7 @@ day=$(date +%d)
 
 if [[ $# == 1 ]]; then
   month=12
-  # todo: must add trailing 0
-  day=$1
+  day=$(printf "%02d" "$1")
 else
   if [[ $month != 12 ]]; then
     echo "Not december yet!"
@@ -20,8 +19,8 @@ else
   fi
 fi
 
-# This will fail of input file is already present
-# and thus will not execute the destructive command below
+# This will fail if input file is already present and
+# thus will not execute the destructive command below
 cabal run fetch -- --day "$day"
 
 cp -n src/AoC/Days/Day00.hs src/AoC/Days/Day"$day".hs
