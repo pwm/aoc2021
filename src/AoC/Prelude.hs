@@ -35,14 +35,14 @@ module AoC.Prelude
 where
 
 import Control.Applicative as X (Alternative (..))
-import Control.Lens as X (Each (..), over, set, toListOf, view, (%~), (&), (.~), (^.), _1, _2)
+import Control.Lens as X (Each (..), element, over, set, toListOf, view, (%~), (&), (.~), (^.), _1, _2)
 import Control.Monad as X (foldM, when, (<=<), (>=>))
 import Data.Bifunctor as X (first)
 import Data.Either as X
-import Data.Foldable as X (Foldable (..), asum, foldl')
+import Data.Foldable as X (Foldable (..), asum)
 import Data.Functor.Identity as X (Identity (..))
 import Data.Generics.Labels as X ()
-import Data.List as X (intersect, sortOn, transpose, uncons, unfoldr, union, (\\))
+import Data.List as X
 import Data.List.Split as X
 import Data.Map.Strict as X (Map, (!?))
 import Data.Map.Strict qualified as Map
