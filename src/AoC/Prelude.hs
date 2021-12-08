@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-compat-unqualified-imports #-}
+
 module AoC.Prelude
   ( module X,
     -- custom
@@ -48,6 +50,7 @@ import Data.Map.Strict as X (Map, (!?))
 import Data.Map.Strict qualified as Map
 import Data.Maybe as X hiding (fromJust)
 import Data.Ord as X (Down (..), comparing)
+import Data.Sequence as X (Seq)
 import Data.Set as X (Set)
 import Data.Set qualified as Set
 import Data.Text as X (Text)
