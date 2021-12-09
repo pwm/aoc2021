@@ -23,6 +23,12 @@ stringToDigits s = if length xs == length s then Just xs else Nothing
   where
     xs = concatMap (fmap fst . (\c -> reads @Int [c])) s
 
+-- '1' -> Just 1
+charToDigit :: Char -> Maybe Int
+charToDigit c = case reads @Int [c] of
+  [(n, "")] -> Just n
+  _ -> Nothing
+
 -- (-123456) -> [1, 2, 3, 4, 5, 6]
 -- 0 -> [0]
 integerToDigits :: Integer -> [Int]
