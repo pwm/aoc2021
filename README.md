@@ -1,28 +1,40 @@
 ## (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ *Advent of Code 2021* (◕‿◕✿)
 
-## Use
-
-Build env:
+## Setup
 
     direnv allow .
 
-Set session cookie for the fetcher:
+## Use
 
-    echo 'export AOC_SESSION=<my-aoc-session-cookie>' > .envrc.private
+### With Nix
 
-Build app:
+Build:
+
+    build
+
+Solve:
+
+    solve --day <day>
+
+### With Cabal
+
+Build:
 
     scripts/comp.sh
 
-Solve specific day:
+Solve:
 
     scripts/solve.sh <day>
 
-Run tests:
+## Tests
 
     scripts/test.sh
 
 ## Dev
+
+Set session cookie for the fetcher:
+
+    echo 'export AOC_SESSION=<my-aoc-session-cookie>' > .envrc.private
 
 Create current day:
 
@@ -31,4 +43,3 @@ Create current day:
 Create specific day:
 
     scripts/mkday.sh <day>
-

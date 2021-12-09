@@ -1,5 +1,13 @@
 name: aoc2021
 version: 0.1.0.0
+github: "pwm/aoc2021"
+author: "pwm"
+
+extra-source-files:
+  - README.md
+
+data-files:
+  - input/*.txt
 
 # a set of basic libraries used by most apps
 dependencies:

@@ -6,9 +6,30 @@ cabal-version: 1.12
 
 name:           aoc2021
 version:        0.1.0.0
+homepage:       https://github.com/pwm/aoc2021#readme
+bug-reports:    https://github.com/pwm/aoc2021/issues
+author:         pwm
+maintainer:     pwm
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
+extra-source-files:
+    README.md
+data-files:
+    input/Day00.txt
+    input/Day01.txt
+    input/Day02.txt
+    input/Day03.txt
+    input/Day04.txt
+    input/Day05.txt
+    input/Day06.txt
+    input/Day07.txt
+    input/Day08.txt
+    input/Day09.txt
+
+source-repository head
+  type: git
+  location: https://github.com/pwm/aoc2021
 
 library
   exposed-modules:
