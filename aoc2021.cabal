@@ -26,6 +26,7 @@ library
       AoC.Days.Day05
       AoC.Days.Day06
       AoC.Days.Day07
+      AoC.Days.Day08
       AoC.Days.Day09
       AoC.Lib.Display
       AoC.Lib.Grid
@@ -237,6 +238,7 @@ test-suite spec
       AoC.Days.Day05Spec
       AoC.Days.Day06Spec
       AoC.Days.Day07Spec
+      AoC.Days.Day08Spec
       AoC.Days.Day09Spec
       AoC.DayTester
       Paths_aoc2021
