@@ -25,6 +25,8 @@ module AoC.Prelude
     applyTimes',
     composeM,
     applyTimesM,
+    foldM',
+    applyTimesM',
     substring,
     tupleMin,
     tupleMax,
@@ -142,6 +144,13 @@ composeM = foldr (<=<) pure
 
 applyTimesM :: (Monad m) => Int -> (b -> m b) -> b -> m b
 applyTimesM n = composeM . replicate n
+
+foldM' :: (Monad m) => (a -> b -> m a) -> a -> [b] -> m a
+foldM' _ s [] = pure s
+foldM' f s (x : xs) = f s x >>= \s' -> s' `seq` foldM' f s' xs
+
+applyTimesM' :: (Monad m) => Int -> (b -> m b) -> b -> m b
+applyTimesM' n f s = foldM' (\x _ -> f x) s (replicate n ())
 
 substring :: Int -> Int -> String -> String
 substring start end text = take (end - start) (drop start text)

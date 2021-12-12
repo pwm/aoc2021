@@ -84,6 +84,12 @@ move = moveWith id
 moveWith :: (a -> Pos) -> Pos -> [a] -> Pos
 moveWith d2p = foldr (flip (stepWith d2p))
 
+neighbours4 :: GridOf a -> Pos -> [Pos]
+neighbours4 m = filter (`Map.member` m) . adj4
+
+neighbours8 :: GridOf a -> Pos -> [Pos]
+neighbours8 m = filter (`Map.member` m) . adj8
+
 manhattan :: Pos -> Pos -> Int
 manhattan (x1, y1) (x2, y2) = abs (x1 - x2) + abs (y1 - y2)
 
