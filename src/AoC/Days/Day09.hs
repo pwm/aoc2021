@@ -43,8 +43,5 @@ exploreBasin pos = do
       if v == 9
         then pure []
         else do
-          vs <- concat <$> traverse exploreBasin (neighbours hm pos)
+          vs <- concat <$> traverse exploreBasin (neighbours4 hm pos)
           pure (v : vs)
-
-neighbours :: HeightMap -> Pos -> [Pos]
-neighbours hm = filter (`Map.member` hm) . adj4
