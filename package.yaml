@@ -12,6 +12,7 @@ data-files:
 # a set of basic libraries used by most apps
 dependencies:
   - base >= 4.7 && < 5
+  - advent-of-code-ocr
   - bytestring
   - containers
   - cookie
