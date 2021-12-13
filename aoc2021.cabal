@@ -28,6 +28,7 @@ data-files:
     input/Day09.txt
     input/Day10.txt
     input/Day11.txt
+    input/Day12.txt
     input/Day13.txt
 
 source-repository head
@@ -54,6 +55,7 @@ library
       AoC.Days.Day09
       AoC.Days.Day10
       AoC.Days.Day11
+      AoC.Days.Day12
       AoC.Days.Day13
       AoC.Lib.Display
       AoC.Lib.Grid
@@ -116,6 +118,7 @@ library
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pretty-simple
     , random
     , req
     , split
@@ -181,6 +184,7 @@ executable fetch
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pretty-simple
     , random
     , req
     , split
@@ -246,6 +250,7 @@ executable solve
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pretty-simple
     , random
     , req
     , split
@@ -272,6 +277,7 @@ test-suite spec
       AoC.Days.Day09Spec
       AoC.Days.Day10Spec
       AoC.Days.Day11Spec
+      AoC.Days.Day12Spec
       AoC.Days.Day13Spec
       AoC.DayTester
       Paths_aoc2021
@@ -329,6 +335,7 @@ test-suite spec
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pretty-simple
     , random
     , req
     , split

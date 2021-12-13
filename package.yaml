@@ -26,6 +26,7 @@ dependencies:
   - mtl
   - optparse-applicative
   - parser-combinators
+  - pretty-simple
   - random
   - req
   - split
