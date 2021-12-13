@@ -2,14 +2,13 @@
 
 module AoC.Prelude
   ( module X,
-    -- custom
     pp,
     printError,
     printSuccess,
-    unsafePrint,
-    unsafePutStrLn,
     fixpoint,
     fixpointM,
+    loopTill,
+    loopTillM,
     headOr,
     dropEnd,
     enumerate,
@@ -22,12 +21,10 @@ module AoC.Prelude
     slicesOf,
     lookups,
     compose,
-    applyTimes,
-    applyTimes',
     composeM,
-    applyTimesM,
-    foldM',
-    applyTimesM',
+    times,
+    timesL,
+    timesM,
     substring,
     tupleMin,
     tupleMax,
@@ -62,8 +59,7 @@ import GHC.Generics as X (Generic)
 import Paths_aoc2021 (getDataFileName)
 import System.Exit (exitFailure, exitSuccess)
 import System.IO as X (stdin)
-import System.IO.Unsafe (unsafePerformIO)
-import Text.Pretty.Simple
+import Text.Pretty.Simple (CheckColorTty (..), OutputOptions (..), StringOutputStyle (..), pPrintOpt)
 import Prelude as X
 
 pp :: (Show a) => a -> IO ()
@@ -85,12 +81,6 @@ printError, printSuccess :: String -> IO ()
 printError e = print e >> exitFailure
 printSuccess v = print v >> exitSuccess
 
-unsafePrint :: (Show a) => a -> ()
-unsafePrint = unsafePerformIO . print
-
-unsafePutStrLn :: String -> ()
-unsafePutStrLn = unsafePerformIO . putStrLn
-
 fixpoint :: (Eq a) => (a -> a) -> a -> a
 fixpoint f x = if x == f x then x else fixpoint f (f x)
 
@@ -98,6 +88,31 @@ fixpointM :: (Monad m, Eq a) => (a -> m a) -> a -> m a
 fixpointM f x = do
   y <- f x
   if x == y then pure y else fixpointM f y
+
+compose :: (Foldable t) => t (b -> b) -> b -> b
+compose = foldr (.) id
+
+composeM :: (Foldable t, Monad m) => t (b -> m b) -> b -> m b
+composeM = foldr (<=<) pure
+
+-- strict
+times :: Int -> (b -> b) -> b -> b
+times n f s = foldl' (\x _ -> f x) s (replicate n ())
+
+-- lazy
+timesL :: Int -> (b -> b) -> b -> b
+timesL n = compose . replicate n
+
+timesM :: (Monad m) => Int -> (b -> m b) -> b -> m b
+timesM n = composeM . replicate n
+
+loopTill :: (a -> Bool) -> (a -> a) -> a -> a
+loopTill p step x =
+  if p x then x else loopTill p step (step x)
+
+loopTillM :: (Monad m) => (a -> Bool) -> (a -> m a) -> a -> m a
+loopTillM p step x =
+  if p x then pure x else step x >>= loopTillM p step
 
 -- headOr 0 [] -> 0
 -- headOr 0 [1, 2, 3] -> 1
@@ -145,29 +160,6 @@ slicesOf n = unfoldr $ \xs ->
 
 lookups :: (Ord k) => Map k v -> [k] -> [v]
 lookups g = mapMaybe (g !?)
-
-compose :: (Foldable t) => t (b -> b) -> b -> b
-compose = foldr (.) id
-
-applyTimes :: Int -> (b -> b) -> b -> b
-applyTimes n = compose . replicate n
-
--- strict step + foldl' won't blow the stack
-applyTimes' :: Int -> (b -> b) -> b -> b
-applyTimes' n f s = foldl' (\x _ -> f x) s (replicate n ())
-
-composeM :: (Foldable t, Monad m) => t (b -> m b) -> b -> m b
-composeM = foldr (<=<) pure
-
-applyTimesM :: (Monad m) => Int -> (b -> m b) -> b -> m b
-applyTimesM n = composeM . replicate n
-
-foldM' :: (Monad m) => (a -> b -> m a) -> a -> [b] -> m a
-foldM' _ s [] = pure s
-foldM' f s (x : xs) = f s x >>= \s' -> s' `seq` foldM' f s' xs
-
-applyTimesM' :: (Monad m) => Int -> (b -> m b) -> b -> m b
-applyTimesM' n f s = foldM' (\x _ -> f x) s (replicate n ())
 
 substring :: Int -> Int -> String -> String
 substring start end text = take (end - start) (drop start text)

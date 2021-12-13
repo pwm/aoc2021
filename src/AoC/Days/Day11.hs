@@ -31,7 +31,7 @@ solveB = allFlash
 type Octopi = GridOf (Int, Bool)
 
 turns :: Int -> Octopi -> (Octopi, (Int, Bool))
-turns n = flip runState (0, False) . applyTimesM n turn
+turns n = flip runState (0, False) . timesM n turn
 
 allFlash :: Octopi -> Int
 allFlash = go 0 (0, False)

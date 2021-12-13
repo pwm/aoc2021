@@ -21,10 +21,10 @@ parse s =
         . chunksOf 6
 
 solveA :: Game -> Int
-solveA = checkSum . playTill (not . null . view #bingos)
+solveA = checkSum . loopTill (not . null . view #bingos) turn
 
 solveB :: Game -> Int
-solveB = checkSum . playTill (null . view #cards)
+solveB = checkSum . loopTill (null . view #cards) turn
 
 data Game = MkGame
   { pool :: [Int],
@@ -35,9 +35,6 @@ data Game = MkGame
   deriving stock (Show, Generic)
 
 type Card = [[Int]]
-
-playTill :: (Game -> Bool) -> Game -> Game
-playTill f g = if f g then g else playTill f (turn g)
 
 turn :: Game -> Game
 turn g =
