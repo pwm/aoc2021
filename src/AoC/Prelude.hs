@@ -3,6 +3,7 @@
 module AoC.Prelude
   ( module X,
     -- custom
+    pp,
     printError,
     printSuccess,
     unsafePrint,
@@ -62,7 +63,23 @@ import Paths_aoc2021 (getDataFileName)
 import System.Exit (exitFailure, exitSuccess)
 import System.IO as X (stdin)
 import System.IO.Unsafe (unsafePerformIO)
+import Text.Pretty.Simple
 import Prelude as X
+
+pp :: (Show a) => a -> IO ()
+pp =
+  pPrintOpt
+    NoCheckColorTty
+    ( OutputOptions
+        { outputOptionsIndentAmount = 2,
+          outputOptionsPageWidth = 120,
+          outputOptionsCompact = True,
+          outputOptionsCompactParens = True,
+          outputOptionsInitialIndent = 0,
+          outputOptionsColorOptions = Nothing,
+          outputOptionsStringStyle = EscapeNonPrintable
+        }
+    )
 
 printError, printSuccess :: String -> IO ()
 printError e = print e >> exitFailure
