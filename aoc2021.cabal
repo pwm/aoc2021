@@ -28,6 +28,7 @@ data-files:
     input/Day09.txt
     input/Day10.txt
     input/Day11.txt
+    input/Day13.txt
 
 source-repository head
   type: git
@@ -53,6 +54,7 @@ library
       AoC.Days.Day09
       AoC.Days.Day10
       AoC.Days.Day11
+      AoC.Days.Day13
       AoC.Lib.Display
       AoC.Lib.Grid
       AoC.Lib.Load
@@ -99,7 +101,8 @@ library
       TypeOperators
   ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-unused-packages -Wno-implicit-prelude
   build-depends:
-      base >=4.7 && <5
+      advent-of-code-ocr
+    , base >=4.7 && <5
     , bytestring
     , containers
     , cookie
@@ -162,7 +165,8 @@ executable fetch
       TypeOperators
   ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-unused-packages -Wno-implicit-prelude -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aoc2021
+      advent-of-code-ocr
+    , aoc2021
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -226,7 +230,8 @@ executable solve
       TypeOperators
   ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-unused-packages -Wno-implicit-prelude -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aoc2021
+      advent-of-code-ocr
+    , aoc2021
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -267,6 +272,7 @@ test-suite spec
       AoC.Days.Day09Spec
       AoC.Days.Day10Spec
       AoC.Days.Day11Spec
+      AoC.Days.Day13Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
@@ -306,7 +312,8 @@ test-suite spec
       TypeOperators
   ghc-options: -Weverything -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -Wno-unused-packages -Wno-implicit-prelude -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aoc2021
+      advent-of-code-ocr
+    , aoc2021
     , base >=4.7 && <5
     , bytestring
     , containers
