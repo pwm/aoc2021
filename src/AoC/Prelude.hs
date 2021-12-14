@@ -37,7 +37,7 @@ module AoC.Prelude
 where
 
 import Control.Applicative as X (Alternative (..), liftA2)
-import Control.Lens as X (Each (..), element, over, set, toListOf, view, (%~), (&), (.~), (^.), _1, _2)
+import Control.Lens as X (Each (..), element, over, set, toListOf, use, uses, view, (%=), (%~), (&), (.=), (.~), (^.), _1, _2, _3, _4, _5)
 import Control.Monad as X (foldM, guard, when, (<=<), (>=>))
 import Data.Bifunctor as X (first)
 import Data.Either as X
@@ -110,9 +110,10 @@ loopTill :: (a -> Bool) -> (a -> a) -> a -> a
 loopTill p step x =
   if p x then x else loopTill p step (step x)
 
-loopTillM :: (Monad m) => (a -> Bool) -> (a -> m a) -> a -> m a
-loopTillM p step x =
-  if p x then pure x else step x >>= loopTillM p step
+loopTillM :: (Monad m) => (a -> m Bool) -> (a -> m a) -> a -> m a
+loopTillM p step x = do
+  b <- p x
+  if b then pure x else step x >>= loopTillM p step
 
 -- headOr 0 [] -> 0
 -- headOr 0 [1, 2, 3] -> 1
