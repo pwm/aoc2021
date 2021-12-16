@@ -22,7 +22,7 @@ findLowPoints hm = Map.foldrWithKey f [] hm
   where
     f :: Pos -> Int -> [Int] -> [Int]
     f pos height acc
-      | height < minimum (mapMaybe (hm !?) (adj4 pos)) = height : acc
+      | height < minimum (lookupNs4 pos hm) = height : acc
       | otherwise = acc
 
 findBasins :: HeightMap -> [[Int]]

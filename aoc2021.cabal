@@ -31,6 +31,7 @@ data-files:
     input/Day12.txt
     input/Day13.txt
     input/Day14.txt
+    input/Day15.txt
 
 source-repository head
   type: git
@@ -59,7 +60,9 @@ library
       AoC.Days.Day12
       AoC.Days.Day13
       AoC.Days.Day14
+      AoC.Days.Day15
       AoC.Lib.Display
+      AoC.Lib.Graph
       AoC.Lib.Grid
       AoC.Lib.Load
       AoC.Lib.Memo
@@ -100,6 +103,7 @@ library
       OverloadedStrings
       ScopedTypeVariables
       StandaloneDeriving
+      StrictData
       TupleSections
       TypeApplications
       TypeOperators
@@ -120,6 +124,7 @@ library
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pqueue
     , pretty-simple
     , random
     , req
@@ -165,6 +170,7 @@ executable fetch
       OverloadedStrings
       ScopedTypeVariables
       StandaloneDeriving
+      StrictData
       TupleSections
       TypeApplications
       TypeOperators
@@ -186,6 +192,7 @@ executable fetch
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pqueue
     , pretty-simple
     , random
     , req
@@ -231,6 +238,7 @@ executable solve
       OverloadedStrings
       ScopedTypeVariables
       StandaloneDeriving
+      StrictData
       TupleSections
       TypeApplications
       TypeOperators
@@ -252,6 +260,7 @@ executable solve
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pqueue
     , pretty-simple
     , random
     , req
@@ -282,6 +291,7 @@ test-suite spec
       AoC.Days.Day12Spec
       AoC.Days.Day13Spec
       AoC.Days.Day14Spec
+      AoC.Days.Day15Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
@@ -316,6 +326,7 @@ test-suite spec
       OverloadedStrings
       ScopedTypeVariables
       StandaloneDeriving
+      StrictData
       TupleSections
       TypeApplications
       TypeOperators
@@ -338,6 +349,7 @@ test-suite spec
     , mtl
     , optparse-applicative
     , parser-combinators
+    , pqueue
     , pretty-simple
     , random
     , req

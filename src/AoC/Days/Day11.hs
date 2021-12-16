@@ -4,7 +4,6 @@ import AoC.Lib.Grid
 import AoC.Lib.SimpleParser
 import AoC.Prelude
 import Control.Monad.State.Strict
-import Data.Bifunctor
 import Data.Map.Strict qualified as Map
 
 parse :: String -> Maybe Octopi

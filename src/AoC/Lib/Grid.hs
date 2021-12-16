@@ -90,6 +90,12 @@ neighbours4 m = filter (`Map.member` m) . adj4
 neighbours8 :: GridOf a -> Pos -> [Pos]
 neighbours8 m = filter (`Map.member` m) . adj8
 
+lookupNs4 :: Pos -> GridOf a -> [a]
+lookupNs4 p m = lookups m (adj4 p)
+
+lookupNs8 :: Pos -> GridOf a -> [a]
+lookupNs8 p m = lookups m (adj8 p)
+
 manhattan :: Pos -> Pos -> Int
 manhattan (x1, y1) (x2, y2) = abs (x1 - x2) + abs (y1 - y2)
 
