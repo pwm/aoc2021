@@ -39,7 +39,7 @@ where
 import Control.Applicative as X (Alternative (..), liftA2)
 import Control.Lens as X (Each (..), element, over, set, toListOf, use, uses, view, (%=), (%~), (&), (.=), (.~), (^.), _1, _2, _3, _4, _5)
 import Control.Monad as X (foldM, guard, when, (<=<), (>=>))
-import Data.Bifunctor as X (first)
+import Data.Bifunctor as X
 import Data.Either as X
 import Data.Foldable as X (Foldable (..), asum)
 import Data.Functor.Identity as X (Identity (..))
@@ -160,7 +160,7 @@ slicesOf n = unfoldr $ \xs ->
    in if length s >= n then Just (s, t) else Nothing
 
 lookups :: (Ord k) => Map k v -> [k] -> [v]
-lookups g = mapMaybe (g !?)
+lookups m = mapMaybe (m !?)
 
 substring :: Int -> Int -> String -> String
 substring start end text = take (end - start) (drop start text)
