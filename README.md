@@ -6,29 +6,20 @@
 
 ## Use
 
-### With Nix
-
-Build:
-
-    build
-
-Solve:
-
-    solve --day <day>
-
 ### With Cabal
 
-Build:
-
     scripts/comp.sh
-
-Solve:
-
     scripts/solve.sh <day>
 
-## Tests
+### With Nix
+
+    build
+    solve --day <day>
+
+## Test
 
     scripts/test.sh
+    scripts/test.sh <day>
 
 ## Dev
 
@@ -39,7 +30,4 @@ Set session cookie for the fetcher:
 Create current day:
 
     scripts/mkday.sh
-
-Create specific day:
-
     scripts/mkday.sh <day>

@@ -13,15 +13,13 @@ solveB :: Packet -> Int
 solveB = eval
 
 checkSum :: Packet -> Int
-checkSum (PacketLit header _) = versionId header
-checkSum (PacketOp header Op {subs}) = versionId header + sum (checkSum <$> subs)
+checkSum (PLit Header {versionId} _) = versionId
+checkSum (POp Header {versionId} (Op subs)) = versionId + sum (checkSum <$> subs)
 
 eval :: Packet -> Int
-eval (PacketLit _ (Lit i)) = i
-eval (PacketOp Header {typeId} Op {subs})
-  | typeId == 0 && length subs == 1 = eval (head subs)
+eval (PLit _ (Lit i)) = i
+eval (POp Header {typeId} (Op subs))
   | typeId == 0 = sum $ eval <$> subs
-  | typeId == 1 && length subs == 1 = eval (head subs)
   | typeId == 1 = product $ eval <$> subs
   | typeId == 2 = minimum $ eval <$> subs
   | typeId == 3 = maximum $ eval <$> subs
@@ -31,8 +29,8 @@ eval (PacketOp Header {typeId} Op {subs})
   | otherwise = error "invalid Op"
 
 data Packet
-  = PacketLit Header Lit
-  | PacketOp Header Op
+  = PLit Header Lit
+  | POp Header Op
   deriving stock (Show)
 
 data Header = Header
@@ -44,28 +42,23 @@ data Header = Header
 newtype Lit = Lit Int
   deriving stock (Show)
 
-data Op = Op
-  { byLength :: Bool,
-    subLength :: Maybe Int,
-    subCount :: Maybe Int,
-    subs :: [Packet]
-  }
+newtype Op = Op [Packet]
   deriving stock (Show)
 
 rootP :: Parser Packet
-rootP = packetP <* many bit0P
+rootP = packetP <* many bit0
 
 packetP :: Parser Packet
 packetP = do
   header <- headerP
   if typeId header == 4
-    then PacketLit header <$> litP
-    else PacketOp header <$> opP
+    then PLit header <$> litP
+    else POp header <$> opP
 
 headerP :: Parser Header
 headerP = do
-  versionId <- b2d <$> count 3 bitP
-  typeId <- b2d <$> count 3 bitP
+  versionId <- b2d <$> bits 3
+  typeId <- b2d <$> bits 3
   pure $ Header versionId typeId
 
 litP :: Parser Lit
@@ -73,38 +66,34 @@ litP = Lit . b2d <$> litChunk
   where
     litChunk :: Parser String
     litChunk = do
-      prefix <- count 1 bitP
-      if b2d prefix == 0
-        then count 4 bitP
+      prefix <- b2d <$> bits 1
+      if prefix == 0
+        then bits 4
         else do
-          next <- count 4 bitP
+          next <- bits 4
           rest <- litChunk
           pure $ next <> rest
 
 opP :: Parser Op
 opP = do
-  byLength <- (== 0) . b2d <$> count 1 bitP
-  subSize <- b2d <$> count (if byLength then 15 else 11) bitP
+  byLength <- (== 0) . b2d <$> bits 1
+  subSize <- b2d <$> bits (if byLength then 15 else 11)
   subs <-
     if byLength
       then do
-        subsS <- count subSize bitP
+        subsS <- bits subSize
         case runParser (some packetP) "" subsS of
           Right v -> pure v
           Left e -> error (show e)
       else count subSize packetP
-  pure
-    Op
-      { byLength = byLength,
-        subLength = if byLength then Just subSize else Nothing,
-        subCount = if byLength then Nothing else Just subSize,
-        subs = subs
-      }
+  pure $ Op subs
 
-bitP, bit0P, bit1P :: Parser Char
-bitP = oneOf ['0', '1']
-bit0P = char '0'
-bit1P = char '1'
+bits :: Int -> Parser String
+bits n = count n (bit0 <|> bit1)
+
+bit0, bit1 :: Parser Char
+bit0 = char '0'
+bit1 = char '1'
 
 b2d :: String -> Int
 b2d = foldl' (\acc x -> 2 * acc + c2i x) 0
