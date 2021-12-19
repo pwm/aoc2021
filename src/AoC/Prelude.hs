@@ -6,6 +6,7 @@ module AoC.Prelude
     printError,
     printSuccess,
     fixpoint,
+    fixpointL,
     fixpointM,
     loopTill,
     loopTillM,
@@ -81,8 +82,15 @@ printError, printSuccess :: String -> IO ()
 printError e = print e >> exitFailure
 printSuccess v = print v >> exitSuccess
 
+-- strict
 fixpoint :: (Eq a) => (a -> a) -> a -> a
-fixpoint f x = if x == f x then x else fixpoint f (f x)
+fixpoint f x =
+  let y = f x
+   in if y `seq` x == y then y else fixpoint f y
+
+-- lazy
+fixpointL :: (Eq a) => (a -> a) -> a -> a
+fixpointL f x = if x == f x then x else fixpoint f (f x)
 
 fixpointM :: (Monad m, Eq a) => (a -> m a) -> a -> m a
 fixpointM f x = do
