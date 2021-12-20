@@ -8,6 +8,11 @@ module AoC.Lib.Parser
     lexeme,
     symbol,
     sc,
+    intP0,
+    signedIntP0,
+    lexeme0,
+    symbol0,
+    sc0,
     enumParser,
     maybeToP,
     predToP,
@@ -47,6 +52,21 @@ symbol = Lexer.symbol sc
 
 sc :: Parser ()
 sc = Lexer.space space1 empty empty
+
+intP0 :: Parser Int
+intP0 = lexeme0 Lexer.decimal
+
+signedIntP0 :: Parser Int
+signedIntP0 = Lexer.signed sc intP0
+
+lexeme0 :: Parser a -> Parser a
+lexeme0 = Lexer.lexeme sc0
+
+symbol0 :: String -> Parser String
+symbol0 = Lexer.symbol sc0
+
+sc0 :: Parser ()
+sc0 = Lexer.space empty empty empty
 
 enumParser ::
   forall a.
