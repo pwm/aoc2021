@@ -37,6 +37,7 @@ data-files:
     input/Day18.txt
     input/Day19.txt
     input/Day20.txt
+    input/Day21.txt
 
 source-repository head
   type: git
@@ -71,6 +72,7 @@ library
       AoC.Days.Day18
       AoC.Days.Day19
       AoC.Days.Day20
+      AoC.Days.Day21
       AoC.Lib.Display
       AoC.Lib.Graph
       AoC.Lib.Grid
@@ -128,6 +130,7 @@ library
     , directory
     , filepath
     , generic-lens
+    , hashable
     , http-client
     , http-types
     , lens
@@ -138,6 +141,7 @@ library
     , parser-combinators
     , pqueue
     , pretty-simple
+    , primitive
     , random
     , req
     , split
@@ -198,6 +202,7 @@ executable fetch
     , directory
     , filepath
     , generic-lens
+    , hashable
     , http-client
     , http-types
     , lens
@@ -208,6 +213,7 @@ executable fetch
     , parser-combinators
     , pqueue
     , pretty-simple
+    , primitive
     , random
     , req
     , split
@@ -268,6 +274,7 @@ executable solve
     , directory
     , filepath
     , generic-lens
+    , hashable
     , http-client
     , http-types
     , lens
@@ -278,6 +285,7 @@ executable solve
     , parser-combinators
     , pqueue
     , pretty-simple
+    , primitive
     , random
     , req
     , split
@@ -313,6 +321,7 @@ test-suite spec
       AoC.Days.Day18Spec
       AoC.Days.Day19Spec
       AoC.Days.Day20Spec
+      AoC.Days.Day21Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
@@ -363,6 +372,7 @@ test-suite spec
     , directory
     , filepath
     , generic-lens
+    , hashable
     , hspec
     , http-client
     , http-types
@@ -374,6 +384,7 @@ test-suite spec
     , parser-combinators
     , pqueue
     , pretty-simple
+    , primitive
     , random
     , req
     , split

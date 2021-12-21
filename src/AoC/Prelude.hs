@@ -39,11 +39,12 @@ module AoC.Prelude
 where
 
 import Control.Applicative as X (Alternative (..), liftA2)
-import Control.Lens as X (Each (..), element, over, set, toListOf, use, uses, view, (%=), (%~), (&), (.=), (.~), (^.), _1, _2, _3, _4, _5)
+import Control.Lens as X (Each (..), element, over, set, sumOf, toListOf, use, uses, view, (%=), (%~), (&), (+~), (.=), (.~), (^.), (^..), _1, _2, _3, _4, _5)
 import Control.Monad as X (foldM, guard, when, (<=<), (>=>))
 import Data.Bifunctor as X
 import Data.Either as X
 import Data.Foldable as X (Foldable (..), asum)
+import Data.Functor as X
 import Data.Functor.Identity as X (Identity (..))
 import Data.Generics.Labels as X ()
 import Data.List as X

@@ -19,6 +19,7 @@ dependencies:
   - directory
   - filepath
   - generic-lens
+  - hashable
   - http-client
   - http-types
   - lens
@@ -29,6 +30,7 @@ dependencies:
   - parser-combinators
   - pqueue
   - pretty-simple
+  - primitive
   - random
   - req
   - split
