@@ -45,6 +45,9 @@ move8 = moveWith d2p8
 
 type Pos = (Int, Int)
 
+stepM :: Pos
+stepM = (0, 0)
+
 stepU, stepR, stepD, stepL :: Pos
 stepU = (-1, 0)
 stepR = (0, 1)
@@ -61,16 +64,18 @@ stepSW = (1, -1)
 stepW = stepL
 stepNW = (-1, -1)
 
-n4, n8 :: [Pos]
+n4, n8, n9 :: [Pos]
 n4 = [stepU, stepR, stepD, stepL]
 n8 = [stepN, stepNE, stepE, stepSE, stepS, stepSW, stepW, stepNW]
+n9 = [stepN, stepNE, stepE, stepSE, stepM, stepS, stepSW, stepW, stepNW]
 
 (<+>) :: Pos -> Pos -> Pos
 (x1, y1) <+> (x2, y2) = (x1 + x2, y1 + y2)
 
-adj4, adj8 :: Pos -> [Pos]
+adj4, adj8, adj9 :: Pos -> [Pos]
 adj4 p = (p <+>) <$> n4
 adj8 p = (p <+>) <$> n8
+adj9 p = (p <+>) <$> n9
 
 step :: Pos -> Pos -> Pos
 step = stepWith id
@@ -90,11 +95,17 @@ neighbours4 m = filter (`Map.member` m) . adj4
 neighbours8 :: GridOf a -> Pos -> [Pos]
 neighbours8 m = filter (`Map.member` m) . adj8
 
+neighbours9 :: GridOf a -> Pos -> [Pos]
+neighbours9 m = filter (`Map.member` m) . adj9
+
 lookupNs4 :: Pos -> GridOf a -> [a]
 lookupNs4 p m = lookups m (adj4 p)
 
 lookupNs8 :: Pos -> GridOf a -> [a]
 lookupNs8 p m = lookups m (adj8 p)
+
+lookupNs9 :: Pos -> GridOf a -> [a]
+lookupNs9 p m = lookups m (adj9 p)
 
 manhattan :: Pos -> Pos -> Int
 manhattan (x1, y1) (x2, y2) = abs (x1 - x2) + abs (y1 - y2)
@@ -123,9 +134,9 @@ parseGrid parseCell =
   fmap listToGrid . traverse (traverse parseCell) . lines
 
 printGrid :: forall a. (a -> Char) -> GridOf a -> String
-printGrid draw =
-  flip evalState 0 . foldM go "" . Map.toAscList
+printGrid draw m0 = evalState (foldM go "" l0) (fst $ fst $ head l0)
   where
+    l0 = Map.toAscList m0
     go :: (MonadState Int m) => String -> (Pos, a) -> m String
     go m ((x, _), b) = do
       c <- get
