@@ -22,19 +22,19 @@ solveB _ = ()
 type XYZ = (Int, Int, Int)
 
 {-
-finding pairs of scanners that have overlapping detection regions such that 
+finding pairs of scanners that have overlapping detection regions such that
 there are at least 12 beacons that both scanners detect within the overlap
 
-By establishing 12 common beacons, you can precisely determine where the scanners 
-are relative to each other, allowing you to reconstruct the beacon map one scanner 
+By establishing 12 common beacons, you can precisely determine where the scanners
+are relative to each other, allowing you to reconstruct the beacon map one scanner
 at a time.
 
-the scanners also don't know their rotation or facing direction. 
-Due to magnetic alignment, each scanner is rotated some integer number of 90-degree 
+the scanners also don't know their rotation or facing direction.
+Due to magnetic alignment, each scanner is rotated some integer number of 90-degree
 turns around all of the x, y, and z axes.
 
-In total, each scanner could be in any of 24 different orientations: 
-facing positive or negative x, y, or z, and considering any of four directions "up" 
+In total, each scanner could be in any of 24 different orientations:
+facing positive or negative x, y, or z, and considering any of four directions "up"
 from that facing.
 -}
 

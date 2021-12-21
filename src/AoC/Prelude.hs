@@ -32,6 +32,7 @@ module AoC.Prelude
     tupleSum,
     tupleProduct,
     binToDec,
+    decToBin,
     sqrtInt,
     choose,
   )
@@ -183,6 +184,14 @@ tupleProduct = product . toListOf each
 
 binToDec :: [Bool] -> Integer
 binToDec = foldl' (\acc x -> 2 * acc + toInteger (fromEnum x)) 0
+
+decToBin :: Integer -> [Bool]
+decToBin 0 = [False]
+decToBin n = (== 1) <$> go n []
+  where
+    go :: Integer -> [Integer] -> [Integer]
+    go 0 r = r
+    go k rs = go (k `div` 2) (k `mod` 2 : rs)
 
 sqrtInt :: Int -> Int
 sqrtInt = floor @Double . sqrt . fromIntegral
