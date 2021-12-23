@@ -14,7 +14,7 @@ solveB :: [BinT Int] -> Int
 solveB =
   maximum
     . fmap (magnitude . uncurry add)
-    . addFlippedPairs
+    . (\xs -> fmap swap xs <> xs)
     . fromMaybe []
     . traverse l2p
     . pick 2
@@ -98,9 +98,6 @@ leaves :: BinT a -> [a]
 leaves = \case
   Leaf n -> [n]
   Node lt rt -> leaves lt <> leaves rt
-
-addFlippedPairs :: [(a, a)] -> [(a, a)]
-addFlippedPairs xs = fmap (\(a, b) -> (b, a)) xs <> xs
 
 -- Tree search
 

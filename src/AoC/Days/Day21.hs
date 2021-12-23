@@ -11,7 +11,7 @@ parse :: String -> Maybe (Int, Int)
 parse = parseMaybe gameP
 
 solveA :: (Int, Int) -> Int
-solveA = uncurry checkSum . flip runState (Die 0 0) . playTill1000 . newGame
+solveA = uncurry checkSum . playTill1000 . newGame
 
 solveB :: (Int, Int) -> Int
 solveB = uncurry max . playQTill21 . newGame
@@ -62,8 +62,10 @@ playQTill21 = memoIntMap openRec
       let d3 n = Die (val + n) (rolls + 1)
        in d3 <$> [1, 2, 3]
 
-playTill1000 :: Game -> State Die Game
-playTill1000 = loopTillM (pure . reached 1000) turn
+playTill1000 :: Game -> (Game, Die)
+playTill1000 =
+  flip runState (Die 0 0)
+    . loopTillM (pure . reached 1000) turn
   where
     turn :: Game -> State Die Game
     turn Game {p1, p2, next}

@@ -57,6 +57,7 @@ import Data.Sequence as X (Seq)
 import Data.Set as X (Set)
 import Data.Set qualified as Set
 import Data.Text as X (Text)
+import Data.Tuple as X
 import Data.Void as X (Void)
 import GHC.Generics as X (Generic)
 import Paths_aoc2021 (getDataFileName)
