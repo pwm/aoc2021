@@ -17,6 +17,7 @@ dependencies:
   - containers
   - cookie
   - directory
+  - either
   - filepath
   - generic-lens
   - hashable

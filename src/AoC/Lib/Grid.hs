@@ -107,14 +107,14 @@ lookupNs8 p m = lookups m (adj8 p)
 lookupNs9 :: Pos -> GridOf a -> [a]
 lookupNs9 p m = lookups m (adj9 p)
 
-manhattan :: Pos -> Pos -> Int
-manhattan (x1, y1) (x2, y2) = abs (x1 - x2) + abs (y1 - y2)
-
 mkRect :: Int -> Int -> Int -> Int -> [Pos]
 mkRect ln hn lm hm = (,) <$> [ln .. hn] <*> [lm .. hm]
 
 mkSquare :: Int -> [Pos]
 mkSquare n = mkRect 0 (n - 1) 0 (n - 1)
+
+manhattan :: Pos -> Pos -> Int
+manhattan (x1, y1) (x2, y2) = abs (x1 - x2) + abs (y1 - y2)
 
 --
 
@@ -147,3 +147,27 @@ printGrid draw m0 = evalState (foldM go "" l0) (fst $ fst $ head l0)
 roundTripGrid :: (Char -> Maybe a) -> (a -> Char) -> String -> Bool
 roundTripGrid parseCell printCell s =
   (printGrid printCell <$> parseGrid parseCell s) == Just s
+
+--
+
+type AdjMapOf a = Map (Pos, a) [(Pos, a)]
+
+toAdjMapOf :: forall a. (Ord a) => (Pos -> [Pos]) -> GridOf a -> AdjMapOf a
+toAdjMapOf nexts grid =
+  Map.foldrWithKey (\p a -> Map.insert (p, a) (mapMaybe lkps (nexts p))) mempty grid
+  where
+    lkps :: Pos -> Maybe (Pos, a)
+    lkps p = case grid !? p of
+      Nothing -> Nothing
+      Just a -> Just (p, a)
+
+type AdjMapPos = Map Pos [Pos]
+
+toAdjMapPos :: (Pos -> [Pos]) -> GridOf a -> AdjMapPos
+toAdjMapPos nexts grid =
+  Map.foldrWithKey (\p _ -> Map.insert p (mapMaybe lkps (nexts p))) mempty grid
+  where
+    lkps :: Pos -> Maybe Pos
+    lkps p = case grid !? p of
+      Nothing -> Nothing
+      Just _ -> Just p

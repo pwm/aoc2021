@@ -39,6 +39,8 @@ data-files:
     input/Day20.txt
     input/Day21.txt
     input/Day22.txt
+    input/Day23.txt
+    input/Day24.txt
 
 source-repository head
   type: git
@@ -75,6 +77,8 @@ library
       AoC.Days.Day20
       AoC.Days.Day21
       AoC.Days.Day22
+      AoC.Days.Day23
+      AoC.Days.Day24
       AoC.Lib.Display
       AoC.Lib.Graph
       AoC.Lib.Grid
@@ -130,6 +134,7 @@ library
     , containers
     , cookie
     , directory
+    , either
     , filepath
     , generic-lens
     , hashable
@@ -202,6 +207,7 @@ executable fetch
     , containers
     , cookie
     , directory
+    , either
     , filepath
     , generic-lens
     , hashable
@@ -274,6 +280,7 @@ executable solve
     , containers
     , cookie
     , directory
+    , either
     , filepath
     , generic-lens
     , hashable
@@ -325,6 +332,8 @@ test-suite spec
       AoC.Days.Day20Spec
       AoC.Days.Day21Spec
       AoC.Days.Day22Spec
+      AoC.Days.Day23Spec
+      AoC.Days.Day24Spec
       AoC.DayTester
       Paths_aoc2021
   hs-source-dirs:
@@ -373,6 +382,7 @@ test-suite spec
     , containers
     , cookie
     , directory
+    , either
     , filepath
     , generic-lens
     , hashable
