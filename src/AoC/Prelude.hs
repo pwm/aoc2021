@@ -3,6 +3,7 @@
 module AoC.Prelude
   ( module X,
     pp,
+    withIO,
     printError,
     printSuccess,
     fixpoint,
@@ -15,6 +16,7 @@ module AoC.Prelude
     enumerate,
     hasKeys,
     rsort,
+    decoSort,
     charAt,
     l2p,
     getDataFileName,
@@ -39,11 +41,14 @@ module AoC.Prelude
 where
 
 import Control.Applicative as X (Alternative (..), liftA2)
-import Control.Lens as X (Each (..), element, over, set, sumOf, toListOf, use, uses, view, (%=), (%~), (&), (+~), (.=), (.~), (^.), (^..), _1, _2, _3, _4, _5)
+import Control.Lens as X (Each (..), element, filtered, filteredBy, folded, maximumByOf, maximumOf, minimumByOf, minimumOf, over, preview, review, set, sumOf, toListOf, use, uses, view, (%=), (%~), (*~), (+~), (.=), (.~), (^.), (^..), (^?), _1, _2, _3, _4, _5, _Just, _Nothing)
 import Control.Monad as X (foldM, guard, when, (<=<), (>=>))
 import Data.Bifunctor as X
+import Data.Bitraversable as X
+import Data.Containers.ListUtils as X
 import Data.Either as X
 import Data.Foldable as X (Foldable (..), asum)
+import Data.Function as X
 import Data.Functor as X
 import Data.Functor.Identity as X (Identity (..))
 import Data.Generics.Labels as X ()
@@ -63,6 +68,7 @@ import GHC.Generics as X (Generic)
 import Paths_aoc2021 (getDataFileName)
 import System.Exit (exitFailure, exitSuccess)
 import System.IO as X (stdin)
+import System.IO.Unsafe (unsafePerformIO)
 import Text.Pretty.Simple (CheckColorTty (..), OutputOptions (..), StringOutputStyle (..), pPrintOpt)
 import Prelude as X
 
@@ -80,6 +86,9 @@ pp =
           outputOptionsStringStyle = EscapeNonPrintable
         }
     )
+
+withIO :: IO a -> b -> b
+withIO a b = let !_ = unsafePerformIO a in b
 
 printError, printSuccess :: String -> IO ()
 printError e = print e >> exitFailure
@@ -148,6 +157,9 @@ hasKeys keys = Set.isSubsetOf keys . Map.keysSet
 -- [2,3,1,2] -> [3,2,2,1]
 rsort :: (Ord a) => [a] -> [a]
 rsort = sortOn Down
+
+decoSort :: (Ord b) => (a -> b) -> [a] -> [a]
+decoSort f = map snd . sortBy (comparing fst) . map (\x -> (f x, x))
 
 -- 2 "abcd" -> Just 'c'
 -- 5 "abcd" -> Nothing

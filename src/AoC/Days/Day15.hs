@@ -19,10 +19,10 @@ type AdjMap = Map Pos [(Pos, Int)]
 
 solve :: GridOf Int -> Int
 solve grid =
-  let start = fst (Map.findMin grid)
+  let adjMap = toAdjMap grid
+      start = fst (Map.findMin grid)
       dest = fst (Map.findMax grid)
-      adjMap = toAdjMap grid
-   in snd $ last $ dijkstra (step adjMap) start (== dest)
+   in snd $ last $ dijkstra (step adjMap) (== dest) start
 
 step :: AdjMap -> Pos -> [(Pos, Int)]
 step adjMap node = fromMaybe [] (adjMap !? node)
