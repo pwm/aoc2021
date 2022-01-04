@@ -3,6 +3,7 @@
 module AoC.Prelude
   ( module X,
     pp,
+    pad,
     withIO,
     printError,
     printSuccess,
@@ -47,7 +48,7 @@ import Data.Bifunctor as X
 import Data.Bitraversable as X
 import Data.Containers.ListUtils as X
 import Data.Either as X
-import Data.Foldable as X (Foldable (..), asum)
+import Data.Foldable as X (Foldable (..), asum, traverse_)
 import Data.Function as X
 import Data.Functor as X
 import Data.Functor.Identity as X (Identity (..))
@@ -86,6 +87,11 @@ pp =
           outputOptionsStringStyle = EscapeNonPrintable
         }
     )
+
+pad :: Int -> String -> String
+pad n s
+  | length s >= n = s
+  | otherwise = s <> replicate (n - length s) ' '
 
 withIO :: IO a -> b -> b
 withIO a b = let !_ = unsafePerformIO a in b
